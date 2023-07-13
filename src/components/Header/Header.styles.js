@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import CircularProgress from "@mui/material/CircularProgress";
 
-export const Container = styled.div`
+export const ContainerStyled = styled.div`
   height: 80px;
   padding: 0 42px;
   margin: 16px;
@@ -10,11 +10,12 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-export const StyledMUICircularProgress = styled(CircularProgress)`
+export const MUICircularProgressStyled = styled(CircularProgress)`
   color: #4f8ec3 !important;
 `;
-export const Title = styled.h1`
+export const TitleStyled = styled.h1`
 color: #4f8ec3;
 font-weight: 500;
 font-size: 20px;
 `;
+

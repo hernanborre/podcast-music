@@ -1,4 +1,4 @@
-import { StyledMUICircularProgress, Title, Container } from "./Header.styles";
+import { ContainerStyled, MUICircularProgressStyled, TitleStyled} from "./Header.styles";
 import { useContext } from "react";
 import { LoadingContext } from "../../context/LoadingContext";
 import { Link } from "react-router-dom";
@@ -7,12 +7,12 @@ export const Header = () => {
   const { isContextLoading } = useContext(LoadingContext);
   return (
     <header>
-      <Container>
+      <ContainerStyled>
         <Link to="/" data-testid="headerHomeLink"> 
-          <Title>Podcaster</Title>
+          <TitleStyled>Podcaster</TitleStyled>
         </Link>
-        {isContextLoading && <StyledMUICircularProgress />}
-      </Container>
+        {isContextLoading && <MUICircularProgressStyled />}
+      </ContainerStyled>
     </header>
   );
 };
