@@ -1,12 +1,14 @@
 {
   "name": "podcast-music",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.0",
     "@tanstack/react-query": "^4.29.19",
+    "linkify-react": "^4.1.1",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.1",
@@ -42,6 +44,9 @@
     "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
-    "@testing-library/user-event": "^14.4.3"
+    "@testing-library/user-event": "^14.4.3",
+    "eslint": "^8.44.0",
+    "eslint-plugin-react": "^7.32.2",
+    "jest": "^27.5.1"
   }
 }
