@@ -42,7 +42,7 @@ export const PodcastEpisodeDetailCard = ({ currentTrack }) => {
           {description}
         </Linkify>
         <CardMedia
-          data-testid="audioPlayer"
+          data-testid="audio-player-test-id"
           sx={{
             marginTop: "48px",
             boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.3)",
