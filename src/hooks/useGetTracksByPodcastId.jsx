@@ -1,21 +1,25 @@
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
-import { useCallback } from "react";
+import { useQuery } from "@tanstack/react-query"
+import { useParams } from "react-router-dom"
+import { useCallback } from "react"
 
 export const useGetTracksByPodcastId = () => {
-  const { podcastId } = useParams();
+  const { podcastId } = useParams()
   const fetchTracks = useCallback(async () => {
-    const response = await fetch(
-      `https://cors-anywhere.herokuapp.com/itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode`
-    );
+    const URL = "https://itunes.apple.com/lookup?id="
+    const queryParams = "&media=podcast&entity=podcastEpisode"
+    const proxiedUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`${URL}${podcastId}${queryParams}`)}`
+
+    const response = await fetch(proxiedUrl)
+
     if (!response.ok) {
       console.error(response)
-      throw new Error("Failed to fetch tracks for podcastId: " + podcastId);
+      throw new Error("Failed to fetch tracks for podcastId: " + podcastId)
     }
-    return response.json();
-  }, [podcastId]);
+    const data = await response.json()
+    return data
+  }, [podcastId])
   const { isLoading, data, error } = useQuery(["tracks", podcastId], fetchTracks, {
-    staleTime: 1000 * 60 * 60 * 24,
-  });
-  return { isLoading, data, error };
-};
+    cacheTime: 1000 * 60 * 60 * 24,
+  })
+  return { isLoading, data, error }
+}
