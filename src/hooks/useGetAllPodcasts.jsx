@@ -12,7 +12,7 @@ export const useGetAllPodcasts = () => {
     return response.json();
   };
   const { isLoading, data, error } = useQuery(["podcasts"], fetchPodcastList, {
-    staleTime: 1000 * 60 * 60 * 24,
+    cacheTime: 1000 * 60 * 60 * 24,
   });
   return { isLoading, data, error };
 };
