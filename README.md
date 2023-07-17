@@ -44,8 +44,3 @@ _Credits_: This project was bootstrapped with [Create React App](https://github.
 ### Analyzing the Bundle Size
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-
-## Troubleshooting
-Please make sure that every 24 hours you allow the CORS Anywhere free tier service to run on your server by accessing the following link: 
-https://cors-anywhere.herokuapp.com/corsdemo and click the button named _"Request temporary access to the demo server"_
