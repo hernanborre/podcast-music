@@ -31,7 +31,7 @@ export const PodcastDetailEpisodesList = ({ tracksData }) => {
                     {row.trackName}
                   </Link>
                 </TableCell>
-                <TableCell align="right">{new Intl.DateTimeFormat("en-US").format(new Date(row.releaseDate))}</TableCell>
+                <TableCell align="right">{new Intl.DateTimeFormat("es").format(new Date(row.releaseDate))}</TableCell>
                 <TableCell align="right">{moment.utc(row.trackTimeMillis).format("HH:mm")}</TableCell>
               </TableRow>
             )
