@@ -15,11 +15,11 @@ import { PodcastDetailStyled, PodcastColumStyled } from "./PodcastDetail.styles"
 export const PodcastDetail = () => {
   const { podcastId } = useParams()
   const { data } = useGetAllPodcasts()
-  const { data: tracksData, isLoading } = useGetTracksByPodcastId(podcastId)
+  const { data: tracksData, isLoading } = useGetTracksByPodcastId()
   const { setIsContextLoading } = useContext(LoadingContext)
 
   //filter the data to get the podcast with the same id as the one in the router params
-  const podcast = data?.feed?.entry?.find((podcast) => podcast.id.attributes["im:id"] === podcastId)
+  const podcast = data?.feed?.entry?.find((podcast: any) => podcast.id.attributes["im:id"] === podcastId)
   useEffect(() => {
     setIsContextLoading(isLoading)
   }, [isLoading, setIsContextLoading])

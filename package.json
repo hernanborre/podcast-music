@@ -1,12 +1,17 @@
 {
   "name": "podcast-music",
-  "version": "0.11.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.0",
     "@tanstack/react-query": "^4.29.19",
+    "@types/jest": "^29.5.3",
+    "@types/node": "^20.4.4",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/parser": "^5.62.0",
     "linkify-react": "^4.1.1",
     "moment": "^2.29.4",
     "react": "^18.2.0",
@@ -14,6 +19,7 @@
     "react-router-dom": "^6.14.1",
     "react-scripts": "5.0.1",
     "styled-components": "^6.0.3",
+    "typescript": "^4.1.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -45,8 +51,9 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
-    "eslint": "^8.44.0",
+    "eslint": "^8.45.0",
     "eslint-plugin-react": "^7.32.2",
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "prettier": "^3.0.0"
   }
 }

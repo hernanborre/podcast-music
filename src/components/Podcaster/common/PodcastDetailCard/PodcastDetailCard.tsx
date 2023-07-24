@@ -3,7 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 import {Card, CardContent, CardMedia} from "@mui/material";
 import { PodcastDetailCardStyled } from "./PodcastDetailCard.styles";
 
-export const PodcastDetailCard = ({ podcast, podcastId }) => {
+export const PodcastDetailCard = ({ podcast, podcastId } : any) => {
   // TODO: fix
   //get the location to use it to decide if the card should be a link or not
   const location = useLocation();

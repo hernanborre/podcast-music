@@ -1,6 +1,8 @@
 import { screen, render } from "@testing-library/react"
 import { PodcastListItem } from "./PodcastListItem"
-import { TestWithMemoryRouter } from "../../../../utils/test-utils/TestWrapperComponent"
+//import { TestWithMemoryRouter } from "../../../../utils/test-utils/TestWrapperComponent"
+import { TestWithMemoryRouter } from "@/utils/test-utils/TestWrapperComponent"
+
 
 describe("PodcastListItem component tests", () => {
   const podcast = {

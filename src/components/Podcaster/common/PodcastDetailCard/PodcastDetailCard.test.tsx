@@ -6,7 +6,7 @@ import { TestWithMemoryRouter } from "../../../../utils/test-utils/TestWrapperCo
 const mockedLink = jest.fn()
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
-  Link: (props) => <div {...props} onClick={mockedLink} />,
+  Link: (props :any) => <div {...props} onClick={mockedLink} />,
 }))
 
 describe("PodcastDetailCard component tests", () => {

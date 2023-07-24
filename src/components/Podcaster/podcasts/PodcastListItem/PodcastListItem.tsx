@@ -1,7 +1,7 @@
 //Styled components
 import { PodcastListItemStyled } from "./PodcastListItem.styles"
 
-export const PodcastListItem = ({ podcast }) => {
+export const PodcastListItem = ({ podcast } : any) => {
   return (
     <PodcastListItemStyled title={podcast["im:name"].label.toUpperCase()}>
       <img src={podcast["im:image"][2].label} alt={podcast["im:name"].label} />

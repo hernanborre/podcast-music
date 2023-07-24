@@ -4,7 +4,7 @@ import CardMedia from "@mui/material/CardMedia"
 import CardContent from "@mui/material/CardContent"
 import Linkify from "linkify-react"
 
-export const PodcastEpisodeDetailCard = ({ currentTrack }) => {
+export const PodcastEpisodeDetailCard = ({ currentTrack }: any) => {
   const description = currentTrack?.description.replace(/(\.{3}|-{3})|-{2}/g, "")
   return (
     <Card
@@ -51,7 +51,7 @@ export const PodcastEpisodeDetailCard = ({ currentTrack }) => {
           component="audio"
           controls
           src={currentTrack?.episodeUrl}
-          alt={currentTrack?.episodeName}
+          //alt={currentTrack?.episodeName}
         />
       </CardContent>
     </Card>

@@ -23,10 +23,10 @@ export const PodcastList = () => {
   }, [isLoading, setIsContextLoading])
 
   useEffect(() => {
-    setFilteredPodcasts(data?.feed.entry.filter((podcast) => podcast["im:name"].label.toLowerCase().includes(searchTerm.toLowerCase())))
+    setFilteredPodcasts(data?.feed.entry.filter((podcast: any) => podcast["im:name"].label.toLowerCase().includes(searchTerm.toLowerCase())))
   }, [searchTerm, data?.feed.entry])
 
-  const handleSearch = ({ target }) => {
+  const handleSearch = ({ target } : any) => {
     setSearchTerm(target.value)
   }
 
@@ -35,14 +35,14 @@ export const PodcastList = () => {
       <SearchbarStyled>
         <SearchBarInnerStyled>
           <Badge badgeContent={filteredPodcasts?.length} color="primary" showZero max={999} />
-          <TextField variant="outlined" onChange={handleSearch} type="text" underline="none" placeholder="Filter podcast list..." />
+          <TextField variant="outlined" onChange={handleSearch} type="text" InputProps={{ disableUnderline: true }} placeholder="Filter podcast list..." />
         </SearchBarInnerStyled>
       </SearchbarStyled>
       <ListStyled>
         {filteredPodcasts?.length === 0 ? (
           <h2>No podcasts found...</h2>
         ) : (
-          filteredPodcasts?.map((podcast) => (
+          filteredPodcasts?.map((podcast: any) => (
             <Link key={podcast.id.attributes["im:id"]} to={`/podcast/${podcast.id.attributes["im:id"]}`}>
               <PodcastListItem podcast={podcast} />
             </Link>

@@ -18,7 +18,7 @@ export const PodcastEpisodeDetail = () => {
   const { setIsContextLoading } = useContext(LoadingContext)
 
   // get the podcast id of the uri router path param
-  const podcast = data?.feed?.entry?.find((podcast) => podcast.id.attributes["im:id"] === podcastId)
+  const podcast = data?.feed?.entry?.find((podcast : any) => podcast.id.attributes["im:id"] === podcastId)
 
   // manage loading header navbar with useContext custom hook
   useEffect(() => {
@@ -27,7 +27,7 @@ export const PodcastEpisodeDetail = () => {
 
   useEffect(() => {
     if (tracksData) {
-      const track = tracksData.results.find((track) => track.trackId === Number(trackId))
+      const track = tracksData.results.find((track : any) => track.trackId === Number(trackId))
       setCurrentTrack(track)
     }
   }, [tracksData, trackId])

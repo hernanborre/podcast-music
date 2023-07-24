@@ -4,10 +4,11 @@ import { Table, TableContainer } from "@mui/material"
 import { TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import Paper from "@mui/material/Paper"
 
-export const PodcastDetailEpisodesList = ({ tracksData }) => {
+export const PodcastDetailEpisodesList = ({ tracksData }: any) => {
   return (
     <TableContainer component={Paper} sx={{ marginTop: "16px", boxShadow: "0 0 8px 0 rgba(0, 0, 0, 0.2)" }}>
-      <Table sx={{ minWidth: 600 }} aria-label="tracks-list" size="large">
+      {/* <Table size="large" sx={{ minWidth: 600 }} aria-label="tracks-list" > */}
+      <Table sx={{ minWidth: 600 }} aria-label="tracks-list" >
         <TableHead>
           <TableRow>
             <TableCell>
@@ -22,7 +23,7 @@ export const PodcastDetailEpisodesList = ({ tracksData }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {tracksData?.results?.map((row, i) => {
+          {tracksData?.results?.map((row: any, i: any) => {
             if (i === 0) return null
             return (
               <TableRow key={row.trackId} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
