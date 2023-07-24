@@ -29,8 +29,7 @@ export const PodcastList = () => {
   const handleSearch = ({ target } : any) => {
     setSearchTerm(target.value)
   }
-//          //InputProps={{ disableUnderline: true }}
-
+  
   return (
     <PodcastListStyled>
       <SearchbarStyled>

@@ -8,7 +8,7 @@ const queryClient = new QueryClient()
 export const TesWithBrowserRouter = ({ children }: any) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <LoadingContextProvider value={{ isContextLoading: true, setIsContextLoading: () => {} }}>
+      <LoadingContextProvider value={{ isContextLoading: false, setIsContextLoading: () => {} }}>
         <BrowserRouter>{children}</BrowserRouter>
       </LoadingContextProvider>
     </QueryClientProvider>
@@ -18,7 +18,7 @@ export const TesWithBrowserRouter = ({ children }: any) => {
 export const TestWithMemoryRouter = ({ children } : any) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <LoadingContextProvider value={{ isContextLoading: true, setIsContextLoading: () => {} }}>
+      <LoadingContextProvider value={{ isContextLoading: false, setIsContextLoading: () => {} }}>
         <MemoryRouter>{children}</MemoryRouter>
       </LoadingContextProvider>
     </QueryClientProvider>
