@@ -8,18 +8,14 @@ type LoadingContextType = {
   setIsContextLoading: Dispatch<SetStateAction<boolean>>
 }
 
-type LoadingContextProviderProps = {
-  children: ReactNode
-  value: LoadingContextType // New prop to pass the context value
-}
 // Loading Circle Cross-app manager context
 export const LoadingContext = createContext<LoadingContextType>({
   isContextLoading: false,
   setIsContextLoading: () => {}
 })
 
-export const LoadingContextProvider = ({ children, value }: LoadingContextProviderProps) => {
+export const LoadingContextProvider = ({ children }: any) => {
   const [isContextLoading, setIsContextLoading] = useState(false)
-  //const value: LoadingContextType = { isContextLoading, setIsContextLoading }
+  const value: LoadingContextType = { isContextLoading, setIsContextLoading }
   return <LoadingContext.Provider value={value}>{children}</LoadingContext.Provider>
 }
