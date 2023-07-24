@@ -29,13 +29,14 @@ export const PodcastList = () => {
   const handleSearch = ({ target } : any) => {
     setSearchTerm(target.value)
   }
+//          //InputProps={{ disableUnderline: true }}
 
   return (
     <PodcastListStyled>
       <SearchbarStyled>
         <SearchBarInnerStyled>
           <Badge badgeContent={filteredPodcasts?.length} color="primary" showZero max={999} />
-          <TextField variant="outlined" onChange={handleSearch} type="text" InputProps={{ disableUnderline: true }} placeholder="Filter podcast list..." />
+          <TextField variant="outlined" onChange={handleSearch} type="text" placeholder="Filter podcast list..." /> 
         </SearchBarInnerStyled>
       </SearchbarStyled>
       <ListStyled>
