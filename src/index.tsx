@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { App } from "./App";
+import { App } from "./App"
 
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { LoadingContextProvider } from "./context/LoadingContext";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import React from "react"
+import ReactDOM from "react-dom/client"
+import { LoadingContextProvider } from "./context/LoadingContext"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
-import "./index.css";
+import "./index.css"
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 
-const root = ReactDOM.createRoot(document.getElementById("root") as Element);
+const root = ReactDOM.createRoot(document.getElementById("root") as Element)
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
@@ -19,4 +19,4 @@ root.render(
       </LoadingContextProvider>
     </QueryClientProvider>
   </React.StrictMode>
-);
+)

@@ -1,8 +1,8 @@
 import { BrowserRouter as Router } from "react-router-dom"
 
-import { Layout } from "./components/Layout/Layout"
-import { Header } from "./components/Header/Header"
-import { Home } from "./pages/Podcaster/Home";
+import { Layout } from "./ui/components/Layout/Layout"
+import { Header } from "./ui/components/Header/Header"
+import { Home } from "./ui/Podcaster/Home";
 
 export function App() {
   return (
