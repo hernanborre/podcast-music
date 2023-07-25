@@ -11,8 +11,8 @@ import { useGetAllPodcasts } from "../../../hooks/useGetAllPodcasts"
 import { useGetTracksByPodcastId } from "../../../hooks/useGetTracksByPodcastId"
 
 import { PodcastDetailStyled, PodcastColumStyled } from "./PodcastDetail.styles"
-import Episode from "@/infraestructure/repository/dtos/Episode/Episode"
-import { PodcastDetailResponse } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponse"
+import Episode from "@/infraestructure/repository/dtos/Episode/EpisodeDTO"
+import { PodcastDetailResponse } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponseDTO"
 
 export const PodcastDetail = () => {
   const { podcastId } = useParams()

@@ -3,8 +3,8 @@ import moment from "moment"
 import { Table, TableContainer } from "@mui/material"
 import { TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import Paper from "@mui/material/Paper"
-import { PodcastDetailResponse } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponse"
-import { PodcastDetail } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetail"
+import { PodcastDetailResponse } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponseDTO"
+import { PodcastDetail } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailDTO"
 
 export const PodcastDetailEpisodesList = ({ tracksData }: { tracksData: PodcastDetailResponse | undefined }) => {
   return (

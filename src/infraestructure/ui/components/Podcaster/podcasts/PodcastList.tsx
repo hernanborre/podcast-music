@@ -9,7 +9,7 @@ import { LoadingContext } from "../../../context/LoadingContext"
 
 import { PodcastListItem } from "./PodcastListItem/PodcastListItem"
 import { PodcastListStyled, ListStyled, SearchbarStyled, SearchBarInnerStyled } from "./PodcastList.styles"
-import Episode from "@/infraestructure/repository/dtos/Episode/Episode"
+import Episode from "@/infraestructure/repository/dtos/Episode/EpisodeDTO"
 
 
 export const PodcastList = () => {

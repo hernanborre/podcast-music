@@ -6,7 +6,7 @@ import { PriceDTO } from "./PriceDTO"
 import { IconDTO } from "./IconDTO"
 import { LinkDTO } from "./LinkDTO"
 
-export default interface PodcastEpisode {
+export default interface EpisodeDTO {
   id: ID
   title: IconDTO
   "im:name": IconDTO

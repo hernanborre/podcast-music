@@ -1,4 +1,4 @@
-import Episode from "@/infraestructure/repository/dtos/Episode/Episode"
+import Episode from "@/infraestructure/repository/dtos/Episode/EpisodeDTO"
 import { useQuery } from "@tanstack/react-query"
 
 const URI_LIST_ALL_EPISODES = "https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json"

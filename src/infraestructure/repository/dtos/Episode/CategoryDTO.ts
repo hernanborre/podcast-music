@@ -1,15 +1,15 @@
-export interface Category {
-  attributes: CategoryAttributes
+export interface CategoryDTO {
+  attributes: CategoryAttributesDTO
 }
 
-interface CategoryAttributes {
+interface CategoryAttributesDTO {
   "im:id": string
   scheme: string
-  term: PurpleLabel
-  label: PurpleLabel
+  term: PurpleLabelDTO
+  label: PurpleLabelDTO
 }
 
-enum PurpleLabel {
+enum PurpleLabelDTO {
   Music = "Music",
   MusicInterviews = "Music Interviews",
   MusicHistory = "Music History",

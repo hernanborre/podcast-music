@@ -1,4 +1,4 @@
-export interface PodcastDetail {
+export interface PodcastDetailDTO {
   wrapperType?: string
   collectionName?: string
   feedUrl?: string

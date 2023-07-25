@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router-dom"
 import { useCallback } from "react"
-import { PodcastDetailResponse } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponse"
+import { PodcastDetailResponseDTO } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponseDTO"
 
 export const useGetTracksByPodcastId = () => {
   const { podcastId } = useParams()
-  const fetchTracks = useCallback(async (): Promise<PodcastDetailResponse> => {
+  const fetchTracks = useCallback(async (): Promise<PodcastDetailResponseDTO> => {
     const URL = "https://itunes.apple.com/lookup?id="
     const queryParams = "&media=podcast&entity=podcastEpisode"
     const proxiedUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`${URL}${podcastId}${queryParams}`)}`

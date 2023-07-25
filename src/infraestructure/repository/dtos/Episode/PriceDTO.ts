@@ -6,12 +6,12 @@ enum PriceLabel {
   Get = "Get"
 }
 
-export interface Price {
-  attributes: PriceAttributes
+export interface PriceDTO {
+  attributes: PriceAttributesDTO
   label: PriceLabel
 }
 
-interface PriceAttributes {
+interface PriceAttributesDTO {
   amount: string
   currency: Currency
 }

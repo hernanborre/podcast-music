@@ -1,4 +1,4 @@
-import { PodcastDetailResponse } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponse"
+import { PodcastDetailResponse } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponseDTO"
 import { PodcastDetailHeaderStyled } from "./PodcastDetailHeader.styles"
 
 //export const PodcastDetailHeader = ({tracksData} : {tracksData: PodcastDetailResponse}) => {

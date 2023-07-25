@@ -2,7 +2,7 @@ import { screen, render } from "@testing-library/react"
 import { TestWithMemoryRouter } from "../../../../../../utils/test-utils/TestWrapperComponent"
 import { PodcastDetailHeader } from "./PodcastDetailHeader"
 import "@testing-library/jest-dom/extend-expect"
-import { PodcastDetailResponse } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponse"
+import { PodcastDetailResponse } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponseDTO"
 
 describe("PodcastDetailHeader component tests suite", () => {
   let tracksDataMock: PodcastDetailResponse

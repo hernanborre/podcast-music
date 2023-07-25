@@ -9,9 +9,9 @@ import { PodcastDetailCard } from "../common/PodcastDetailCard"
 import { useParams } from "react-router-dom"
 import { useGetAllPodcasts } from "../../../hooks/useGetAllPodcasts"
 import { useGetTracksByPodcastId } from "../../../hooks/useGetTracksByPodcastId"
-import { PodcastDetail } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetail"
-import Episode from "@/infraestructure/repository/dtos/Episode/Episode"
-import { PodcastDetailResponse } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponse"
+import { PodcastDetail } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailDTO"
+import Episode from "@/infraestructure/repository/dtos/Episode/EpisodeDTO"
+import { PodcastDetailResponse } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponseDTO"
 
 export const PodcastEpisodeDetail = () => {
   const [currentTrack, setCurrentTrack] = useState<PodcastDetail | undefined | null>(null)
