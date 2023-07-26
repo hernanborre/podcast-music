@@ -9,11 +9,17 @@ import { LoadingContext } from "../../../context/LoadingContext"
 
 import { PodcastListItem } from "./PodcastListItem/PodcastListItem"
 import { PodcastListStyled, ListStyled, SearchbarStyled, SearchBarInnerStyled } from "./PodcastList.styles"
-import Episode from "@/infraestructure/repository/dtos/Episode/EpisodeDTO"
+import EpisodeDTO from "@/infraestructure/repository/dtos/Episode/EpisodeDTO"
+import { FilteredPodcastsUseCase } from "../../../../../application/usecases/FilteredPodcastUseCase"
+import { GetAllPodcastsUseCase } from "@/application/usecases/GetAllPodcastsUseCase"
+//import  {FetchPodcastsRepository}   from "../../../../../infraestructure/repository/adapter"
 
 
 export const PodcastList = () => {
-  const { data , isLoading } = useGetAllPodcasts()
+  //const getAllPodcastsUseCase = new GetAllPodcastsUseCase(new FetchPodcastsRepository())
+  const { data, isLoading }: { data?: EpisodeDTO[]; isLoading: boolean } = useGetAllPodcasts()
+  //const { data, isLoading }: { data?: EpisodeDTO[]; isLoading: boolean } = useGetAllPodcasts()
+
   const { setIsContextLoading } = useContext(LoadingContext)
 
   const [filteredPodcasts, setFilteredPodcasts] = useState(data)
@@ -24,19 +30,19 @@ export const PodcastList = () => {
   }, [isLoading, setIsContextLoading])
 
   useEffect(() => {
-    setFilteredPodcasts(data?.filter((podcast: Episode) => podcast["im:name"].label.toLowerCase().includes(searchTerm.toLowerCase())))
+    setFilteredPodcasts(new FilteredPodcastsUseCase().execute(data, searchTerm?.toLowerCase()))
   }, [searchTerm, data])
 
-  const handleSearch = ({ target } : any) => {
+  const handleSearch = ({ target }: any) => {
     setSearchTerm(target.value)
   }
-  
+
   return (
     <PodcastListStyled>
       <SearchbarStyled>
         <SearchBarInnerStyled>
           <Badge badgeContent={filteredPodcasts?.length} color="primary" showZero max={999} />
-          <TextField variant="outlined" onChange={handleSearch} type="text" placeholder="Filter podcast list..." /> 
+          <TextField variant="outlined" onChange={handleSearch} type="text" placeholder="Filter podcast list..." />
         </SearchBarInnerStyled>
       </SearchbarStyled>
       <ListStyled>
