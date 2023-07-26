@@ -1,5 +1,5 @@
 
-export default interface PodcastEpisode {
+export interface PodcastEpisode {
   id: ID
   title: IconDTO
   "im:name": IconDTO
