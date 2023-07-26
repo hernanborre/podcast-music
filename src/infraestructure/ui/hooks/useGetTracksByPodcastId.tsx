@@ -17,12 +17,10 @@ export const useGetTracksByPodcastId = () => {
       throw new Error("Failed to fetch tracks for podcastId: " + podcastId)
     }
     const data = await response.json()
-    //console.log(data);
     return data
   }, [podcastId])
   const { isLoading, data, error } = useQuery(["tracks", podcastId], fetchTracks, {
     cacheTime: 1000 * 60 * 60 * 24
   })
-  console.log(data)
   return { isLoading, data, error }
 }

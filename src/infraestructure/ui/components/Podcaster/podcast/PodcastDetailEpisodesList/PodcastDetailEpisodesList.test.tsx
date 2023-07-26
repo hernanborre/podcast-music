@@ -12,31 +12,33 @@ jest.mock("react-router-dom", () => ({
 }))
 
 describe("PodcastDetailEpisodesList component tests", () => {
-  const tracksDataMock: PodcastDetailResponseDTO = {
-    resultCount:51,
-    results: [
-      {
-        collectionId: 696969,
-        trackId: 13131313,
-        trackTimeMillis: 22091950,
-        collectionName: "Test Collection 1",
-        trackName: "Test Track 1",
-        trackCount: 2,
-        releaseDate: "1986-03-13T07:03:84Z",
-        description: "A brief description of this podcast lorem ipsum test"
-      },
-      {
-        collectionId: 696969,
-        trackCount: 3,
-        trackId: 191919,
-        trackTimeMillis: 24121950,
-        collectionName: "Test Collection 2",
-        trackName: "Test Track 2",
-        releaseDate: "2021-09-22T09:00:00Z",
-        description: "A brief description of this podcast lorem ipsum test 2"
-      },
-    ],
-  }
+  const tracksDataMock = 
+  [
+    {
+      trackId: "13131313",
+      trackTimeMillis: 22091950,
+      trackName: "Test Track 1",
+      episodeUrl: "https://lalala.test.com/episode=3", 
+      trackCount: 2,
+      releaseDate: "1986-03-13T07:03:84Z",
+      description: "A brief description of this podcast lorem ipsum test", 
+      shortDescription: "Shorty descriptions 1", 
+      collectionId: 324234
+    },
+    {
+      trackCount: 3,
+      episodeUrl: "https://lalala.test.com/episode=3",
+      trackId: "191919",
+      trackTimeMillis: 24121950,
+      trackName: "Test Track 2",
+      releaseDate: "2021-09-22T09:00:00Z",
+      description: "A brief description of this podcast lorem ipsum test 2", 
+      shortDescription: "Shorty descriptions 3", 
+      collectionId: 23232
+    },
+  ]
+
+
   test("should render PodcastDetailEpisodesList component", () => {
     render(
       <TestWithMemoryRouter>

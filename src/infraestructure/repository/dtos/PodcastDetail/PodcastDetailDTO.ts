@@ -5,8 +5,8 @@ export interface PodcastDetailDTO {
   artistViewUrl?: string
   trackViewUrl?: string
   closedCaptioning?: string
-  episodeUrl?: string
-  collectionId?: number
+  episodeUrl: string
+  collectionId: number
   trackId: number
   artistIds?: Array<number>
   trackTimeMillis: number
@@ -17,7 +17,7 @@ export interface PodcastDetailDTO {
   description: string
   trackCount: number
   trackName: string
-  shortDescription?: string
+  shortDescription: string
   episodeGuid?: string
   releaseDate: string
   country?: string

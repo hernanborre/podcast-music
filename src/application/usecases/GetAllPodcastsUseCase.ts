@@ -1,15 +1,10 @@
+import PodcastRepository from "@/domain/repository/PodcastRepository"
+import { PodcastEpisode } from "@/domain/models"
 
-import PodcastRepository from "@/domain/repository/PodcastRepository";
-import { PodcastEpisode } from "@/domain/models";
+export class GetAllPodcastsUseCase {
+  constructor(private podcasteRepository: PodcastRepository) {}
 
-export default class GetAllPodcastsUseCase {
-  
-  // inyectar el repository
-  constructor(private podcasteRepository: PodcastRepository) {
-      // aquí se implementa la interfaz para que nuestro model  services / use cases 
-  }
-
-  execute( ): Promise<PodcastEpisode[]> {
+  execute(): Promise<PodcastEpisode[]> {
     return this.podcasteRepository.getAllPodcasts()
   }
 }

@@ -1,13 +1,10 @@
 import { PodcastDetail, PodcastEpisode } from "../../../domain/models"
 import { PodcastRepository } from "../../../domain/repository"
 import EpisodeDTO from "../dtos/Episode/EpisodeDTO"
+import { PodcastDetailDTO } from "../dtos/PodcastDetail/PodcastDetailDTO"
+import { PodcastDetailResponseDTO } from "../dtos/PodcastDetail/PodcastDetailResponseDTO"
 
 export default class FetchPodcastRepository implements PodcastRepository {
-  // es importante que la implementación de esta interfaz devuelva
-  // la información de MI MODEL (el propio chico y limpio)
-  // aquí hacemos la adptación del DTO del Response a nuestro modelo que
-  // luego usará la view
-
   async getAllPodcasts(): Promise<PodcastEpisode[]> {
     const URI_LIST_ALL_EPISODES = "https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json"
     const response = await fetch(URI_LIST_ALL_EPISODES)
@@ -19,7 +16,6 @@ export default class FetchPodcastRepository implements PodcastRepository {
 
     const topEpisodes: EpisodeDTO[] = responseData?.feed?.entry as EpisodeDTO[]
     const data: PodcastEpisode[] = this.podcastEpisodeDTOMapper(topEpisodes)
-    console.log("MAPPED EPISODES", data)
     return data
 
     // const { isLoading, data, error } = useQuery(["podcasts"], fetchPodcastList, {
@@ -36,14 +32,13 @@ export default class FetchPodcastRepository implements PodcastRepository {
         title: item["im:name"].label,
         summary: item.summary.label,
         author: item["im:artist"].label,
-        //img: item["im:image"][0].label
         img: images
       }
     })
     return data
   }
 
-  async getPodcastDetail(podcastId: string): Promise<PodcastDetail> {
+  async getPodcastDetail(podcastId: string): Promise<PodcastDetail[]> {
     const URL = "https://itunes.apple.com/lookup?id="
     const queryParams = "&media=podcast&entity=podcastEpisode"
     const proxiedUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`${URL}${podcastId}${queryParams}`)}`
@@ -55,11 +50,28 @@ export default class FetchPodcastRepository implements PodcastRepository {
       throw new Error("Failed to fetch tracks for podcastId: " + podcastId)
     }
     const data = await response.json()
-    //console.log(data);
-    return data as PodcastDetail
+    this.podcastDetailDTOMapper(data as PodcastDetailResponseDTO)
 
+    return this.podcastDetailDTOMapper(data as PodcastDetailResponseDTO)
     // const { isLoading, data, error } = useQuery(["tracks", podcastId], fetchTracks, {
     //     cacheTime: 1000 * 60 * 60 * 24
     //   })
+  }
+
+  podcastDetailDTOMapper(tracks: PodcastDetailResponseDTO): PodcastDetail[] {
+    const data: PodcastDetail[] = tracks?.results?.map((item: PodcastDetailDTO) => {
+      return {
+        trackId: item.trackId?.toString(),
+        releaseDate: item.releaseDate,
+        trackName: item.trackName?.toString(),
+        description: item.description,
+        trackTimeMillis: item.trackTimeMillis,
+        episodeUrl: item.episodeUrl,
+        trackCount: item.trackCount,
+        collectionId: item.collectionId,
+        shortDescription: item.shortDescription?.toString()
+      }
+    })
+    return data
   }
 }

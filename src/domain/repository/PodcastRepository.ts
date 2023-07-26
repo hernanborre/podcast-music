@@ -5,5 +5,5 @@ export default interface PodcastRepository {
   // fn que llama a los getPodcasts
   // fn contract que llama al detalle getPodcastDetail
   getAllPodcasts(): Promise<PodcastEpisode[]>
-  getPodcastDetail(podcastId: string): Promise<PodcastDetail>
+  getPodcastDetail(podcastId: string): Promise<PodcastDetail[]>
 }

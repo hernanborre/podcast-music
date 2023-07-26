@@ -4,20 +4,17 @@ import { Link } from "react-router-dom"
 import TextField from "@mui/material/TextField"
 import Badge from "@mui/material/Badge"
 
-import { useGetAllPodcasts } from "../../../hooks/useGetAllPodcasts"
 import { LoadingContext } from "../../../context/LoadingContext"
 
 import { PodcastListItem } from "./PodcastListItem/PodcastListItem"
 import { PodcastListStyled, ListStyled, SearchbarStyled, SearchBarInnerStyled } from "./PodcastList.styles"
-import EpisodeDTO from "@/infraestructure/repository/dtos/Episode/EpisodeDTO"
 import { FilteredPodcastsUseCase } from "../../../../../application/usecases/FilteredPodcastUseCase"
-import GetAllPodcastsUseCase from "../../../../../application/usecases/GetAllPodcastsUseCase"
+import {GetAllPodcastsUseCase} from "../../../../../application/usecases"
 import  FetchPodcastRepository from "../../../../repository/adapter/FetchPodcastsRepository"
-import { Podcast, PodcastEpisode } from "@/domain/models"
+import { PodcastEpisode } from "@/domain/models"
 
 export const PodcastList = () => {
   const getAllPodcastsUseCase = new GetAllPodcastsUseCase(new FetchPodcastRepository())
-  //const { data, isLoading }: { data?: EpisodeDTO[]; isLoading: boolean } = useGetAllPodcasts()
   let isLoading = true
   const { setIsContextLoading } = useContext(LoadingContext)
   const [data, setData] = useState<PodcastEpisode[] | null>([])

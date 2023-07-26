@@ -1,5 +1,5 @@
-import { PodcastDetail } from "../../components/Podcaster"
+import { PodcastDetailComponent } from "../../components/Podcaster"
 
 export const PodcastPage = () => {
-  return <PodcastDetail />
+  return <PodcastDetailComponent />
 }

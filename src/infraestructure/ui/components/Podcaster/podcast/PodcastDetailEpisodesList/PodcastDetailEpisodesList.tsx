@@ -5,11 +5,11 @@ import { TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import Paper from "@mui/material/Paper"
 import { PodcastDetailResponseDTO } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponseDTO"
 import { PodcastDetailDTO } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailDTO"
+import { PodcastDetail } from "@/domain/models"
 
-export const PodcastDetailEpisodesList = ({ tracksData }: { tracksData: PodcastDetailResponseDTO | undefined }) => {
+export const PodcastDetailEpisodesList = ({ tracksData }: { tracksData: PodcastDetail[] | undefined | null}) => {
   return (
     <TableContainer component={Paper} sx={{ marginTop: "16px", boxShadow: "0 0 8px 0 rgba(0, 0, 0, 0.2)" }}>
-      {/* <Table size="large" sx={{ minWidth: 600 }} aria-label="tracks-list" > */}
       <Table sx={{ minWidth: 600 }} aria-label="tracks-list">
         <TableHead>
           <TableRow>
@@ -25,7 +25,7 @@ export const PodcastDetailEpisodesList = ({ tracksData }: { tracksData: PodcastD
           </TableRow>
         </TableHead>
         <TableBody>
-          {tracksData?.results?.map((row: PodcastDetailDTO, i: number) => {
+          {tracksData?.map((row: PodcastDetail, i: number) => {
             if (i === 0) return null
             return (
               <TableRow key={row.trackId} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
