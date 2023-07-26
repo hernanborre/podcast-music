@@ -1,10 +1,3 @@
-import { CategoryDTO } from "./CategoryDTO"
-import { ArtistDTO } from "./ArtistDTO"
-import { ReleaseDateDTO } from "./ReleaseDateDTO"
-import { ImageDTO } from "./ImageDTO"
-import { PriceDTO } from "./PriceDTO"
-import { IconDTO } from "./IconDTO"
-import { LinkDTO } from "./LinkDTO"
 
 export default interface PodcastEpisode {
   id: ID
@@ -21,16 +14,86 @@ export default interface PodcastEpisode {
   rights?: IconDTO
 }
 
+ interface CategoryDTO {
+  attributes: CategoryAttributesDTO
+}
+
+ enum Rel {
+  Alternate = "alternate",
+  Self = "self"
+}
+
+ enum Type {
+  TextHTML = "text/html"
+}
+interface CategoryAttributesDTO {
+  "im:id": string
+  scheme: string
+  term: PurpleLabelDTO
+  label: PurpleLabelDTO
+}
+
+enum PurpleLabelDTO {
+  Music = "Music",
+  MusicInterviews = "Music Interviews",
+  MusicHistory = "Music History",
+  MusicCommentary = "Music Commentary"
+}
+
+interface IMArtistAttributesDTO {
+  href: string
+}
+ interface ArtistDTO {
+  attributes?: IMArtistAttributesDTO
+  label: string
+}
+
+ interface ReleaseDateDTO {
+  label: Date
+  attributes: IconDTO
+}
+
+ interface ImageDTO {
+  attributes: ImageAttributesDTO
+  label: string
+}
+
+interface ImageAttributesDTO {
+  height: string
+}
+
 interface ID {
   label: string
   attributes: IDAttributesDTO
+}
+
+enum Currency {
+  Usd = "USD"
+}
+
+enum PriceLabel {
+  Get = "Get"
+}
+
+export interface PriceDTO {
+  attributes: PriceAttributesDTO
+  label: PriceLabel
+}
+
+interface PriceAttributesDTO {
+  amount: string
+  currency: Currency
 }
 
 interface IDAttributesDTO {
   "im:id": string
 }
 
-export interface ContentTypeDTO {
+ interface IconDTO {
+  label: string
+}
+
+ interface ContentTypeDTO {
   attributes: ContentTypeAttributesDTO
 }
 
@@ -41,4 +104,14 @@ interface ContentTypeAttributesDTO {
 
 enum FluffyLabelDTO {
   Podcast = "Podcast"
+}
+
+ interface LinkDTO {
+  attributes: LinkAttributesDTO
+}
+
+interface LinkAttributesDTO {
+  href: string
+  type?: Type
+  rel: Rel
 }

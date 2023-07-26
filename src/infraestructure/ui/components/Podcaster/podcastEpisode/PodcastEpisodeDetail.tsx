@@ -9,15 +9,15 @@ import { PodcastDetailCard } from "../common/PodcastDetailCard"
 import { useParams } from "react-router-dom"
 import { useGetAllPodcasts } from "../../../hooks/useGetAllPodcasts"
 import { useGetTracksByPodcastId } from "../../../hooks/useGetTracksByPodcastId"
-import { PodcastDetail } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailDTO"
+import { PodcastDetailDTO } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailDTO"
 import Episode from "@/infraestructure/repository/dtos/Episode/EpisodeDTO"
-import { PodcastDetailResponse } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponseDTO"
+import { PodcastDetailResponseDTO } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponseDTO"
 
 export const PodcastEpisodeDetail = () => {
-  const [currentTrack, setCurrentTrack] = useState<PodcastDetail | undefined | null>(null)
+  const [currentTrack, setCurrentTrack] = useState<PodcastDetailDTO | undefined | null>(null)
   const { podcastId, episodeId: trackId } = useParams()
   const { data } = useGetAllPodcasts()
-  const { data: tracksData, isLoading }: { data: PodcastDetailResponse | undefined; isLoading: boolean } = useGetTracksByPodcastId()
+  const { data: tracksData, isLoading }: { data: PodcastDetailResponseDTO | undefined; isLoading: boolean } = useGetTracksByPodcastId()
   const { setIsContextLoading } = useContext(LoadingContext)
 
   // get the podcast id of the uri router path param
@@ -30,7 +30,7 @@ export const PodcastEpisodeDetail = () => {
 
   useEffect(() => {
     if (tracksData) {
-      const track = tracksData.results.find((track: PodcastDetail) => track.trackId === Number(trackId))
+      const track = tracksData.results.find((track: PodcastDetailDTO) => track.trackId === Number(trackId))
       setCurrentTrack(track)
     }
   }, [tracksData, trackId])

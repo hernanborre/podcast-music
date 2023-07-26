@@ -1,6 +1,6 @@
 import { IconDTO } from "./IconDTO"
 
-export interface ReleaseDate {
+export interface ReleaseDateDTO {
   label: Date
   attributes: IconDTO
 }

@@ -3,10 +3,10 @@ import moment from "moment"
 import { Table, TableContainer } from "@mui/material"
 import { TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import Paper from "@mui/material/Paper"
-import { PodcastDetailResponse } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponseDTO"
-import { PodcastDetail } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailDTO"
+import { PodcastDetailResponseDTO } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponseDTO"
+import { PodcastDetailDTO } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailDTO"
 
-export const PodcastDetailEpisodesList = ({ tracksData }: { tracksData: PodcastDetailResponse | undefined }) => {
+export const PodcastDetailEpisodesList = ({ tracksData }: { tracksData: PodcastDetailResponseDTO | undefined }) => {
   return (
     <TableContainer component={Paper} sx={{ marginTop: "16px", boxShadow: "0 0 8px 0 rgba(0, 0, 0, 0.2)" }}>
       {/* <Table size="large" sx={{ minWidth: 600 }} aria-label="tracks-list" > */}
@@ -25,7 +25,7 @@ export const PodcastDetailEpisodesList = ({ tracksData }: { tracksData: PodcastD
           </TableRow>
         </TableHead>
         <TableBody>
-          {tracksData?.results?.map((row: PodcastDetail, i: number) => {
+          {tracksData?.results?.map((row: PodcastDetailDTO, i: number) => {
             if (i === 0) return null
             return (
               <TableRow key={row.trackId} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>

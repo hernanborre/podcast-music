@@ -3,7 +3,7 @@ import { PodcastDetailEpisodesList } from "./PodcastDetailEpisodesList"
 import { TestWithMemoryRouter } from "../../../../../../utils/test-utils/TestWrapperComponent"
 import userEvent from "@testing-library/user-event"
 import "@testing-library/jest-dom/extend-expect"
-import { PodcastDetailResponse } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponseDTO"
+import { PodcastDetailResponseDTO } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponseDTO"
 
 const mockedLink = jest.fn()
 jest.mock("react-router-dom", () => ({
@@ -12,7 +12,7 @@ jest.mock("react-router-dom", () => ({
 }))
 
 describe("PodcastDetailEpisodesList component tests", () => {
-  const tracksDataMock: PodcastDetailResponse = {
+  const tracksDataMock: PodcastDetailResponseDTO = {
     resultCount:51,
     results: [
       {

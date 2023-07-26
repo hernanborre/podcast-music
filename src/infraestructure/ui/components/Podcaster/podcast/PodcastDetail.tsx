@@ -12,12 +12,12 @@ import { useGetTracksByPodcastId } from "../../../hooks/useGetTracksByPodcastId"
 
 import { PodcastDetailStyled, PodcastColumStyled } from "./PodcastDetail.styles"
 import Episode from "@/infraestructure/repository/dtos/Episode/EpisodeDTO"
-import { PodcastDetailResponse } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponseDTO"
+import { PodcastDetailResponseDTO } from "@/infraestructure/repository/dtos/PodcastDetail/PodcastDetailResponseDTO"
 
 export const PodcastDetail = () => {
   const { podcastId } = useParams()
   const { data } = useGetAllPodcasts()
-  const { data: tracksData, isLoading }: { data: PodcastDetailResponse | undefined; isLoading: boolean } = useGetTracksByPodcastId()
+  const { data: tracksData, isLoading }: { data: PodcastDetailResponseDTO | undefined; isLoading: boolean } = useGetTracksByPodcastId()
   const { setIsContextLoading } = useContext(LoadingContext)
 
   //filter the data to get the podcast with the same id as the one in the router params

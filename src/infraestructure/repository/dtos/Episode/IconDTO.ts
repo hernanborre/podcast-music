@@ -1,3 +1,3 @@
-export interface Icon {
+export interface IconDTO {
   label: string
 }
