@@ -2,8 +2,9 @@ import { useLocation, Link } from "react-router-dom";
 
 import {Card, CardContent, CardMedia} from "@mui/material";
 import { PodcastDetailCardStyled } from "./PodcastDetailCard.styles";
+import { PodcastEpisode } from "@/domain/models";
 
-export const PodcastDetailCard = ({ podcast, podcastId } : any) => {
+export const PodcastDetailCard = ({ podcast, podcastId } : {podcast?: PodcastEpisode, podcastId?: string}) => {
   // TODO: fix
   //get the location to use it to decide if the card should be a link or not
   const location = useLocation();
@@ -22,16 +23,16 @@ export const PodcastDetailCard = ({ podcast, podcastId } : any) => {
               sx={{ borderRadius: 1 }}
               component="img"
               height="240"
-              image={podcast["im:image"][2].label}
-              alt={podcast["im:name"].label}
+              image={podcast?.img[2]}
+              alt={podcast?.title}
             />
             <hr />
-            <h3>{podcast["im:name"].label.toUpperCase()}</h3>
+            <h3>{podcast?.title.toUpperCase()}</h3>
           </Link>
-          <h4>by {podcast["im:artist"].label}</h4>
+          <h4>by {podcast?.author}</h4>
           <hr />
           <h4>Description:</h4>
-          <p>{podcast["summary"].label}</p>
+          <p>{podcast?.summary}</p>
         </CardContent>
       </Card>
     </PodcastDetailCardStyled>

@@ -11,7 +11,7 @@ import { PodcastListItem } from "./PodcastListItem/PodcastListItem"
 import { PodcastListStyled, ListStyled, SearchbarStyled, SearchBarInnerStyled } from "./PodcastList.styles"
 import EpisodeDTO from "@/infraestructure/repository/dtos/Episode/EpisodeDTO"
 import { FilteredPodcastsUseCase } from "../../../../../application/usecases/FilteredPodcastUseCase"
-import { GetAllPodcastsUseCase } from "../../../../../application/usecases/GetAllPodcastsUseCase"
+import GetAllPodcastsUseCase from "../../../../../application/usecases/GetAllPodcastsUseCase"
 import  FetchPodcastRepository from "../../../../repository/adapter/FetchPodcastsRepository"
 import { Podcast, PodcastEpisode } from "@/domain/models"
 

@@ -1,14 +1,14 @@
 export interface Podcast {
   collectionName: string
-  artworkUrl100: string
   artistName: string
+  artworkUrl100: string
 }
 
 // export interface PodcastFromFeed {
 //   id: { attributes: Record<string, string> } // id
-//   "im:name": { label: string } // title?
+//   "im:name": { label: string } // title
 //   "im:artist": { label: string } // artist
- //   "im:image": { label: string }[] // img?
+ //   "im:image": { label: string }[] // img
 //   summary: { label: string } // summary
 // }
 

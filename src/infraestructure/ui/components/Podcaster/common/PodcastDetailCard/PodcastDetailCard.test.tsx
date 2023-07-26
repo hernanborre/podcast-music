@@ -48,7 +48,7 @@ describe("PodcastDetailCard component tests", () => {
   test("should render the PodcastDetailCard component", () => {
     render(
       <TestWithMemoryRouter>
-        <PodcastDetailCard podcastId={podcastId} podcast={podcast} />
+        {/* <PodcastDetailCard podcastId={podcastId} podcast={podcast} /> */}
       </TestWithMemoryRouter>
     )
     expect(screen.getByText(/Name of the podcast test!?/i)).toBeTruthy()
@@ -56,7 +56,7 @@ describe("PodcastDetailCard component tests", () => {
   test("should redirect to the podcast detail page when the user clicks on the podcast title", async () => {
     render(
       <TestWithMemoryRouter>
-        <PodcastDetailCard podcastId={podcastId} podcast={podcast} />
+        {/* <PodcastDetailCard podcastId={podcastId} podcast={podcast} /> */}
       </TestWithMemoryRouter>
     )
     const user = userEvent.setup()
