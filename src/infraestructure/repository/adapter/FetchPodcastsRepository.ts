@@ -1,5 +1,6 @@
-import { PodcastEpisode, PodcastDetail } from "../../../domain/models"
+import { PodcastDetail, PodcastEpisode } from "../../../domain/models"
 import { PodcastRepository } from "../../../domain/repository"
+import EpisodeDTO from "../dtos/Episode/EpisodeDTO"
 
 export default class FetchPodcastRepository implements PodcastRepository {
   // es importante que la implementación de esta interfaz devuelva
@@ -15,12 +16,31 @@ export default class FetchPodcastRepository implements PodcastRepository {
       throw new Error("Failed to fetch podcasts")
     }
     const responseData = await response.json()
-    return responseData?.feed?.entry as PodcastEpisode[]
+
+    const topEpisodes: EpisodeDTO[] = responseData?.feed?.entry as EpisodeDTO[]
+    const data: PodcastEpisode[] = this.podcastEpisodeDTOMapper(topEpisodes)
+    console.log("MAPPED EPISODES", data)
+    return data
 
     // const { isLoading, data, error } = useQuery(["podcasts"], fetchPodcastList, {
     //     cacheTime: 1000 * 60 * 60 * 24
     //   })
     //   return { isLoading, data, error }
+  }
+
+  podcastEpisodeDTOMapper(topEpisodes: EpisodeDTO[]): PodcastEpisode[] {
+    const data: PodcastEpisode[] = topEpisodes.map((item: EpisodeDTO) => {
+      const images: string[] = item["im:image"].map((image) => image.label)
+      return {
+        id: item.id.attributes["im:id"],
+        title: item["im:name"].label,
+        summary: item.summary.label,
+        author: item["im:artist"].label,
+        //img: item["im:image"][0].label
+        img: images
+      }
+    })
+    return data
   }
 
   async getPodcastDetail(podcastId: string): Promise<PodcastDetail> {

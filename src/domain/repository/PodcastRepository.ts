@@ -1,4 +1,4 @@
-import { PodcastDetail, PodcastEpisode } from "../models"
+import { PodcastDetail, Podcast, PodcastEpisode } from "../models"
 
 export default interface PodcastRepository {
   // signatures of the methods to call the ApiFetchRepository

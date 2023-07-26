@@ -11,26 +11,39 @@ import { PodcastListItem } from "./PodcastListItem/PodcastListItem"
 import { PodcastListStyled, ListStyled, SearchbarStyled, SearchBarInnerStyled } from "./PodcastList.styles"
 import EpisodeDTO from "@/infraestructure/repository/dtos/Episode/EpisodeDTO"
 import { FilteredPodcastsUseCase } from "../../../../../application/usecases/FilteredPodcastUseCase"
-import { GetAllPodcastsUseCase } from "@/application/usecases/GetAllPodcastsUseCase"
-//import  {FetchPodcastsRepository}   from "../../../../../infraestructure/repository/adapter"
-
+import { GetAllPodcastsUseCase } from "../../../../../application/usecases/GetAllPodcastsUseCase"
+import  FetchPodcastRepository from "../../../../repository/adapter/FetchPodcastsRepository"
+import { Podcast, PodcastEpisode } from "@/domain/models"
 
 export const PodcastList = () => {
-  //const getAllPodcastsUseCase = new GetAllPodcastsUseCase(new FetchPodcastsRepository())
-  const { data, isLoading }: { data?: EpisodeDTO[]; isLoading: boolean } = useGetAllPodcasts()
+  const getAllPodcastsUseCase = new GetAllPodcastsUseCase(new FetchPodcastRepository())
   //const { data, isLoading }: { data?: EpisodeDTO[]; isLoading: boolean } = useGetAllPodcasts()
-
+  let isLoading = true
   const { setIsContextLoading } = useContext(LoadingContext)
-
-  const [filteredPodcasts, setFilteredPodcasts] = useState(data)
+  const [data, setData] = useState<PodcastEpisode[] | null>([])
+  const [filteredPodcasts, setFilteredPodcasts] = useState<PodcastEpisode[] | undefined | null>(data)
   const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
-    setIsContextLoading(isLoading)
+    const getAllPodcastsData = async () => {
+      setIsContextLoading(true)
+      const allPodcasts = await getAllPodcastsUseCase.execute()
+      setData(allPodcasts)
+      setFilteredPodcasts(data)
+      setIsContextLoading(false)
+    }
+    getAllPodcastsData()
+
+    if(!data) {
+      isLoading=true
+      setIsContextLoading(true)
+    }
   }, [isLoading, setIsContextLoading])
 
   useEffect(() => {
-    setFilteredPodcasts(new FilteredPodcastsUseCase().execute(data, searchTerm?.toLowerCase()))
+    if(data){
+      setFilteredPodcasts(new FilteredPodcastsUseCase().execute(data, searchTerm?.toLowerCase())) 
+    }
   }, [searchTerm, data])
 
   const handleSearch = ({ target }: any) => {
@@ -49,8 +62,9 @@ export const PodcastList = () => {
         {filteredPodcasts?.length === 0 ? (
           <h2>No podcasts found...</h2>
         ) : (
-          filteredPodcasts?.map((podcast: any) => (
-            <Link key={podcast.id.attributes["im:id"]} to={`/podcast/${podcast.id.attributes["im:id"]}`}>
+          filteredPodcasts?.map((podcast: PodcastEpisode) => (
+            //<Link key={podcast.id.attributes["im:id"]} to={`/podcast/${podcast.id.attributes["im:id"]}`}>
+            <Link key={podcast.id} to={`/podcast/${podcast.id}`}>
               <PodcastListItem podcast={podcast} />
             </Link>
           ))
