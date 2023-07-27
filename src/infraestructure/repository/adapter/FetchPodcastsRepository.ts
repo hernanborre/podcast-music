@@ -1,12 +1,23 @@
-import { PodcastDetail, PodcastEpisode } from "../../../domain/models"
+import { Podcast, PodcastDetail, PodcastEpisode } from "../../../domain/models"
 import { PodcastRepository } from "../../../domain/repository"
 import EpisodeDTO from "../dtos/Episode/EpisodeDTO"
 import { PodcastDetailDTO } from "../dtos/PodcastDetail/PodcastDetailDTO"
 import { PodcastDetailResponseDTO } from "../dtos/PodcastDetail/PodcastDetailResponseDTO"
 
+const URI_LIST_ALL_EPISODES = "https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json"
+
+const CACHE_KEY_BYPODCAST = "podcastDetailCache_"
+const CACHE_KEY_ALLPODCASTS = "podcastsCache"
+const CACHE_EXPIRATION_TIME = 1000 * 60 * 60 * 24 // 24 hours in milliseconds
+
 export default class FetchPodcastRepository implements PodcastRepository {
+
   async getAllPodcasts(): Promise<PodcastEpisode[]> {
-    const URI_LIST_ALL_EPISODES = "https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json"
+    const cachedData = this.getPodcastEpisodeCache()
+    if (cachedData) {
+      return cachedData
+    }
+
     const response = await fetch(URI_LIST_ALL_EPISODES)
     if (!response.ok) {
       console.error(response)
@@ -16,12 +27,10 @@ export default class FetchPodcastRepository implements PodcastRepository {
 
     const topEpisodes: EpisodeDTO[] = responseData?.feed?.entry as EpisodeDTO[]
     const data: PodcastEpisode[] = this.podcastEpisodeDTOMapper(topEpisodes)
-    return data
 
-    // const { isLoading, data, error } = useQuery(["podcasts"], fetchPodcastList, {
-    //     cacheTime: 1000 * 60 * 60 * 24
-    //   })
-    //   return { isLoading, data, error }
+    this.setPodcastEpisodeCache(data)
+
+    return data
   }
 
   podcastEpisodeDTOMapper(topEpisodes: EpisodeDTO[]): PodcastEpisode[] {
@@ -39,6 +48,13 @@ export default class FetchPodcastRepository implements PodcastRepository {
   }
 
   async getPodcastDetail(podcastId: string): Promise<PodcastDetail[]> {
+    
+    if(!podcastId) return []
+
+    const cachedData = this.getPodcastDetailCache(podcastId)
+    if (cachedData) {
+      return cachedData
+    }
     const URL = "https://itunes.apple.com/lookup?id="
     const queryParams = "&media=podcast&entity=podcastEpisode"
     const proxiedUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`${URL}${podcastId}${queryParams}`)}`
@@ -50,12 +66,41 @@ export default class FetchPodcastRepository implements PodcastRepository {
       throw new Error("Failed to fetch tracks for podcastId: " + podcastId)
     }
     const data = await response.json()
-    this.podcastDetailDTOMapper(data as PodcastDetailResponseDTO)
+    const podcastDetail: PodcastDetail[] = this.podcastDetailDTOMapper(data as PodcastDetailResponseDTO)
 
-    return this.podcastDetailDTOMapper(data as PodcastDetailResponseDTO)
-    // const { isLoading, data, error } = useQuery(["tracks", podcastId], fetchTracks, {
-    //     cacheTime: 1000 * 60 * 60 * 24
-    //   })
+    this.setPodcastDetailCache(podcastDetail, podcastId)
+    // // Update the cache with the new data and timestamp
+    // const cacheData = {
+    //   parsedData: podcastDetail,
+    //   timestamp: Date.now()
+    // }
+    // localStorage.setItem(cacheKey, JSON.stringify(cacheData))
+
+    return podcastDetail
+  }
+
+  getPodcastDetailCache(podcastId: string): PodcastDetail[] | undefined {
+    const cacheKey = CACHE_KEY_BYPODCAST + podcastId
+    const cachedData = localStorage.getItem(cacheKey)
+    if (cachedData) {
+      const { parsedData, timestamp } = JSON.parse(cachedData)
+      const currentTime = Date.now()
+
+      if (currentTime - timestamp < CACHE_EXPIRATION_TIME) {
+        // Data is still valid, return the cached data
+        return parsedData
+      }
+    }
+  }
+
+  setPodcastDetailCache(podcastDetail: PodcastDetail[], podcastId: string) {
+    const cacheKey = CACHE_KEY_BYPODCAST + podcastId
+    // Update the cache with the new data and timestamp
+    const cacheData = {
+      parsedData: podcastDetail,
+      timestamp: Date.now()
+    }
+    localStorage.setItem(cacheKey, JSON.stringify(cacheData))
   }
 
   podcastDetailDTOMapper(tracks: PodcastDetailResponseDTO): PodcastDetail[] {
@@ -73,5 +118,27 @@ export default class FetchPodcastRepository implements PodcastRepository {
       }
     })
     return data
+  }
+
+  getPodcastEpisodeCache(): PodcastEpisode[] | undefined {
+    const cachedData = localStorage.getItem(CACHE_KEY_ALLPODCASTS)
+    if (cachedData) {
+      const { parsedData, timestamp } = JSON.parse(cachedData)
+      const currentTime = Date.now()
+
+      if (currentTime - timestamp < CACHE_EXPIRATION_TIME) {
+        // Data is still valid, return the cached data
+        return parsedData
+      }
+    }
+  }
+
+  setPodcastEpisodeCache(podcastEpisodes: PodcastEpisode[]) {
+    // Update the cache with the new data and timestamp
+    const cacheData = {
+      parsedData: podcastEpisodes,
+      timestamp: Date.now()
+    }
+    localStorage.setItem(CACHE_KEY_ALLPODCASTS, JSON.stringify(cacheData))
   }
 }
