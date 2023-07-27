@@ -1,8 +1,8 @@
 import { BrowserRouter as Router } from "react-router-dom"
 
-import { Layout } from "./ui/components/Layout/Layout"
-import { Header } from "./ui/components/Header/Header"
-import { Home } from "./ui/Podcaster/Home";
+import { Layout } from "./infraestructure/ui/components/Layout/Layout"
+import { Header } from "./infraestructure/ui/components/Header/Header"
+import { Home } from "./infraestructure/ui/views/Home";
 
 export function App() {
   return (
