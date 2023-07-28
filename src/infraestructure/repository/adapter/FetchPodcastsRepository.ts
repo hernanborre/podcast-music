@@ -1,8 +1,10 @@
+import PodcastDetailCacheRepository from "@/domain/repository/PodcastDetailCacheRepository"
 import { Podcast, PodcastDetail, PodcastEpisode } from "../../../domain/models"
 import { PodcastRepository } from "../../../domain/repository"
 import EpisodeDTO from "../dtos/Episode/EpisodeDTO"
 import { PodcastDetailDTO } from "../dtos/PodcastDetail/PodcastDetailDTO"
 import { PodcastDetailResponseDTO } from "../dtos/PodcastDetail/PodcastDetailResponseDTO"
+import PodcastEpisodeCacheRepository from "@/domain/repository/PodcastEpisodeCacheRepository"
 
 const URI_LIST_ALL_EPISODES = "https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json"
 
@@ -10,7 +12,7 @@ const CACHE_KEY_BYPODCAST = "podcastDetailCache_"
 const CACHE_KEY_ALLPODCASTS = "podcastsCache"
 const CACHE_EXPIRATION_TIME = 1000 * 60 * 60 * 24 // 24 hours in milliseconds
 
-export default class FetchPodcastRepository implements PodcastRepository {
+export default class FetchPodcastRepository implements PodcastRepository, PodcastDetailCacheRepository, PodcastEpisodeCacheRepository {
   async getAllPodcasts(): Promise<PodcastEpisode[]> {
     const cachedData = this.getPodcastEpisodeCache()
     if (cachedData) {

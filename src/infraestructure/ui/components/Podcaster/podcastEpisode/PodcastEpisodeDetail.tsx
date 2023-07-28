@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom"
 import { PodcastDetail, PodcastEpisode } from "@/domain/models"
 
 import { GetAllPodcastsUseCase, GetTracksByPodcastIDUseCase } from "../../../../../application/usecases"
-import { FindTrackByIDUseCase, FindPodcastEpisodeByID }  from  "../../../../../application/usecases/"
+import { FindTrackByIDUseCase, FindPodcastEpisodeByID }  from  "../../../../../application/usecases"
 
 import FetchPodcastRepository from "../../../../repository/adapter/FetchPodcastsRepository"
 
