@@ -11,7 +11,6 @@ const CACHE_KEY_ALLPODCASTS = "podcastsCache"
 const CACHE_EXPIRATION_TIME = 1000 * 60 * 60 * 24 // 24 hours in milliseconds
 
 export default class FetchPodcastRepository implements PodcastRepository {
-
   async getAllPodcasts(): Promise<PodcastEpisode[]> {
     const cachedData = this.getPodcastEpisodeCache()
     if (cachedData) {
@@ -48,8 +47,7 @@ export default class FetchPodcastRepository implements PodcastRepository {
   }
 
   async getPodcastDetail(podcastId: string): Promise<PodcastDetail[]> {
-    
-    if(!podcastId) return []
+    if (!podcastId) return []
 
     const cachedData = this.getPodcastDetailCache(podcastId)
     if (cachedData) {
@@ -67,14 +65,7 @@ export default class FetchPodcastRepository implements PodcastRepository {
     }
     const data = await response.json()
     const podcastDetail: PodcastDetail[] = this.podcastDetailDTOMapper(data as PodcastDetailResponseDTO)
-
     this.setPodcastDetailCache(podcastDetail, podcastId)
-    // // Update the cache with the new data and timestamp
-    // const cacheData = {
-    //   parsedData: podcastDetail,
-    //   timestamp: Date.now()
-    // }
-    // localStorage.setItem(cacheKey, JSON.stringify(cacheData))
 
     return podcastDetail
   }

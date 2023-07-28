@@ -27,7 +27,6 @@ export const PodcastDetailComponent = () => {
   const findPodcastEpisodeByID = new FindPodcastEpisodeByID()
 
   //filter the data to get the podcast with the same id as the one in the router params
-  //const podcast = data?.find((podcast: PodcastEpisode) => podcast.id === podcastId)
   const podcast = findPodcastEpisodeByID.execute(data, podcastId)
   useEffect(() => {
     const getAllPodcastsData = async () => {
@@ -35,10 +34,8 @@ export const PodcastDetailComponent = () => {
       setIsLoading(true)
       const allPodcasts = await getAllPodcastsUseCase.execute()
       setData(allPodcasts)
-      //console.log(`EMPEZANDO FETCH TRACKS DATA PARA: ${podcastId}`)
       const allTracks = await getTracksByPodcastIDUseCase.execute(podcastId)
       setTracksData(allTracks)
-      //console.log(`TERMINANDO FETCH TRACKS DATA PARA: ${podcastId}`)
       setIsLoading(false)
       setIsContextLoading(false)
     }
@@ -46,12 +43,9 @@ export const PodcastDetailComponent = () => {
     getAllPodcastsData()
 
     const getTracksData = async () => {
-      //console.log(`EMPEZANDO FETCH TRACKS DATA PARA: ${podcastId}`)
       const allTracks = await getTracksByPodcastIDUseCase.execute(podcastId)
       setTracksData(allTracks)
-      //console.log(`TERMINANDO FETCH TRACKS DATA PARA: ${podcastId}`)
       setIsContextLoading(false)
-      //console.log("context isloading:  " + isContextLoading)
     }
   }, [setIsContextLoading])
 
